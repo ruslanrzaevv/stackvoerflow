@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from questions.models import Question, Answer
-from questions.forms import AddQuestionFrom, AddAnswerFrom
+from questions.forms import AddQuestionForm, AddAnswerForm
 
 def index(request):
     questions = Question.objects.all()
@@ -14,9 +14,14 @@ def index(request):
 
 def quest_detail(request, question_slug):
     question = get_object_or_404(Question, slug=question_slug)
-
+    answers = Answer.objects.all()
+         
+    form = AddAnswerForm()
+    
     context = {
         'question': question,
+        'answers': answers,
+        'form': form,
     }
 
     return render(request, 'questions/question_detail.html', context)
@@ -33,10 +38,10 @@ def questions_from_tag(request, tag_id):
 
 
 def add_question(request):
-    form = AddQuestionFrom()
+    form = AddQuestionForm()
 
     if request.method == 'POST':
-        form = AddQuestionFrom(request.POST)
+        form = AddQuestionForm(request.POST)
 
         if form.is_valid():
             question = form.save(commit=False)
@@ -53,29 +58,16 @@ def add_question(request):
     return render(request, 'questions/add_question.html', context)
 
 
-def add_answer(request, question_slug):
-    question = get_object_or_404(Question, slug=question_slug)
-
-    answer = Answer.objects.all()
-
-    form = AddAnswerFrom(initial={'question': question})
+def add_answer(request,  question_id):
+    question = get_object_or_404(Question, pk=question_id)
 
     if request.method == 'POST':
-        form = AddAnswerFrom()
-
+        form = AddAnswerForm(request.POST)
 
         if form.is_valid():
             answer = form.save(commit=False)
             answer.user = request.user
             answer.question = question  
             answer.save()   
-            form.save_m2m() 
 
-
-    context = {
-        'form': form,
-        'question': question,
-        'answer': answer,
-    }
-
-    return render(request, 'questions/question_detail.html', context)
+    return redirect('quest_detail', question.slug)

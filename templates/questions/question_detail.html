@@ -1,35 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% block main %}
+<p>{{ question.title }}</p>
+<p>{{ question.body|safe }}</p>
 
-<body>
++
+<form action="{% url 'add_answer' question.pk %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Add answer</button>
+</form>
 
-    <p>{{ question.title }}</p>
-    <p>{{ question.body|safe }}</p>
+<div class="container">
 
-    <a href="{% url 'add_answer' question.slug %}">Add answer</a>
-
-    <form action="." method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Add answer</button>
-    </form>
-
-    {% if answer %}
-        {% for a in answer   %}
-            <p>{{ a.user }}</p>
-            <p>{{ a.answer }}</p>
-            <p>{{ a.created_at }}</p>
-        {% endfor %}
-    {% endif %}
-
-
-
-</body>
-
-</html>
+{% for answer in answers  %}
+    <p>{{ answer.user }}</p>
+    <p>{{ answer.answer }}</p>
+    <p>{{ answer.created_at }}</p>
+{% endfor %}
+{% endblock %}
+</div>

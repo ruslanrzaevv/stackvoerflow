@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Overflow</title>
+    {{ form.media }}
+
+</head>
+<body>
+
+    <style>
+        .container {
+    width: 100;
+    max-width: 1230px;
+    padding: 0 15px;
+    margin: 0 auto;
+    }
+
+    .header {
+    padding-top: 30px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    font-size: 15px;
+}
+
+.nav__link {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 15px;
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.1s linear;
+}
+
+    </style>
+
+    <header class="header">
+        <div class="container">
+
+            <div class="header__inner">
+                <a class="header__logo" href="{% url 'index' %}">Stack Overflow</a>
+            <nav class="nav">
+                {% if request.user.is_authenticated %}
+                    <a class="" href="{% url 'profile' user.username %}">{{ user.username }}</a>
+                    <a class="" href="{% url 'profile' user.username %}">Change</a>
+                    {% else %}
+                        <a class="nav__link" href="#">Log in</a>
+                        <a class="nav__link" href="#">Sign in</a>
+                {% endif %}
+
+            </nav>
+        </div>
+        </div>
+    </header>
+
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main>
+
+    <footer>
+    </footer>
+</body>
+</html>

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,59 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stack Overflow</title>
     {{ form.media }}
+<link rel="stylesheet" href="{% static 'questions/css/style.css' %}">
 
 </head>
 <body>
 
     <style>
-        .container {
-    width: 100;
-    max-width: 1230px;
-    padding: 0 15px;
-    margin: 0 auto;
-    }
-
-    .header {
-    padding-top: 30px;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-}
-
-.header__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav {
-    font-size: 15px;
-}
-
-.nav__link {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 15px;
-    position: relative;
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.1s linear;
-}
 
     </style>
+    
 
     <header class="header">
         <div class="container">
 
             <div class="header__inner">
-                <a class="header__logo" href="{% url 'index' %}">Stack Overflow</a>
+                <a class="header__logo" href="{% url 'index' %}">Stack overflow</a>
+                <form action=".">
+                <input class="header__input" type="text" placeholder="search...">
+                </form>
             <nav class="nav">
                 {% if request.user.is_authenticated %}
-                    <a class="" href="{% url 'profile' user.username %}">{{ user.username }}</a>
-                    <a class="" href="{% url 'profile' user.username %}">Change</a>
+                    <a class="nav__link" href="{% url 'profile' user.username %}">{{ user.username }}</a>
+                    <a class="nav__link" href="{% url 'profile' user.username %}">Change</a>
                     {% else %}
                         <a class="nav__link" href="#">Log in</a>
                         <a class="nav__link" href="#">Sign in</a>
@@ -69,8 +39,14 @@
     </header>
 
     <main>
-        {% block main %}
-        {% endblock %}
+        <div class="content">
+            <div class="container">
+                <div class="content__inner">
+                    {% block main %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>

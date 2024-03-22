@@ -7,6 +7,7 @@
     <title>Stack Overflow</title>
     {{ form.media }}
 <link rel="stylesheet" href="{% static 'questions/css/style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -16,10 +17,10 @@
     </style>
     
 
-    <header class="header">
+    <header class="header" id="header">
         <div class="container">
-
             <div class="header__inner">
+                
                 <a class="header__logo" href="{% url 'index' %}">Stack overflow</a>
                 <form action=".">
                 <input class="header__input" type="text" placeholder="search...">
@@ -39,17 +40,12 @@
     </header>
 
     <main>
-        <div class="content">
-            <div class="container">
-                <div class="content__inner">
-                    {% block main %}
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
+        {% block main %}
+        {% endblock %}
     </main>
 
     <footer>
     </footer>
+    <script src="{% static 'questions/js/app.js' %}"></script>
 </body>
 </html>

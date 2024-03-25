@@ -1,10 +1,19 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from questions.models import Question, Answer
+from django.db.models import Q
 from questions.forms import AddQuestionForm, AddAnswerForm
 
 def index(request):
     questions = Question.objects.all()
+
+    if request.POST.get('q'):
+        search = request.GET.get('q', '')
+
+        questions = Question.objects.filter(
+            Q(title__icontains=search)
+            # Q(tag__icontains=search)
+        )
 
     context = {
         'questions': questions,

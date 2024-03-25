@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stack Overflow</title>
     {{ form.media }}
-<link rel="stylesheet" href="{% static 'questions/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 </head>
 <body>
 
     <style>
-
+        
     </style>
     
 
@@ -22,9 +22,8 @@
             <div class="header__inner">
                 
                 <a class="header__logo" href="{% url 'index' %}">Stack overflow</a>
-                <form action=".">
-                <input class="header__input" type="text" placeholder="search...">
-                </form>
+                {% include "questions/search.html" %}
+
             <nav class="nav">
                 {% if request.user.is_authenticated %}
                     <a class="nav__link" href="{% url 'profile' user.username %}">{{ user.username }}</a>
@@ -46,6 +45,6 @@
 
     <footer>
     </footer>
-    <script src="{% static 'questions/js/app.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
 </body>
 </html>

@@ -1,22 +1,20 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<p>{{ question.title }}</p>
-<p>{{ question.body|safe }}</p>
+    <div class="container">
+        <p>{{ question.title }}</p>
+        <p>{{ question.body|safe }}</p>
+            
+        <form action="{% url 'add_answer' question.pk %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Add answer</button>
+        </form>
 
-    
-<form action="{% url 'add_answer' question.pk %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Add answer</button>
-</form>
-
-<div class="container">
-
-{% for answer in answers  %}
-    <p>{{ answer.user }}</p>
-    <p>{{ answer.answer }}</p>
-    <p>{{ answer.created_at }}</p>
-{% endfor %}
+        {% for answer in answers %}
+            <p>{{ answer.user|safe }}</p>
+            <p>{{ answer.answer|safe }}</p>
+            <p>{{ answer.created_at }}</p>
+        {% endfor %}
+    </div>
 {% endblock %}
-</div>

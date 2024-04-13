@@ -17,12 +17,12 @@
 </div>
 
 
+
+{% for q in questions %}
 <div class="question">
     <div class="container">
         <div class="question__inner">
             <div class="question__item">
-                <div class="question__content">
-                        {% for q in questions %}
                         <a class="title" href="{% url 'quest_detail' q.slug %}">
                             <p>{{ q.title }}</p>
                         </a>
@@ -31,12 +31,13 @@
                         {% endfor %}
                         <p class="name">{{ q.user }}</p>
                         <p class="created">{{ q.created_at }}</p>
-                        {% endfor %}
-                        {% endblock %}
                 </div>
             </div>
         </div>
     </div>
-</div>
+                        
+{% endfor %}
+
+{% endblock %}
 
 

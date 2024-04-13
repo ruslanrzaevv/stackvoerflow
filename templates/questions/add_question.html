@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
 
+
 {% block main %}
-<form action="." method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Создать</button>
-    
-</form>
+
+    <div class="container">
+        <form style="margin-top: 150px;" action="." method="post">
+            {% csrf_token %}
+            <div class="form_error" >{{ form.non_filed_error }}</div>
+            {% for f in form %}
+                <p><div class="form_label" for="{{ f.id_for_label }}">{{ f.label }}</div> {{ f }} </p>
+                <div class="form_error">{{ f.error }}</div>
+            {% endfor %}
+            <button type="submit">Создать</button>
+        </form>
+    </div>
+
 {% endblock %}

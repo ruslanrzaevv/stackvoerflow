@@ -8,6 +8,8 @@
     box-sizing: border-box;
 }
 
+
+
 .container {
     width: 100;
     max-width: 1170px;
@@ -24,7 +26,8 @@
     left: 0;
     right: 0;
     z-index: 1000;
-
+    background-color: #faf9f9;
+    border-bottom: 1px solid #b8b8b8;
 }
 
 
@@ -82,6 +85,7 @@
     border-radius: 5px;
     padding-left: 20px;
     font-size: 14px;
+    color: #346ff9;
 }
 
 .intro{
@@ -102,6 +106,12 @@
     font-size: 32px;
 }
 
+.intro__title:hover{
+    color: #19419e;
+}
+
+
+
 .intro_link{
     text-decoration: none;
     font-size: 17px;
@@ -119,26 +129,103 @@
 .question__inner{
     display: flex;
     flex-direction: column;
-    
 }
 
 .question__item{
     padding: 0 45px 0 175px;
     position: relative;
     margin-bottom: 60px;
-}
+    border-top: 1px solid #b8b8b8;
+    border-left: 1px solid #b8b8b8;
+    border-right: 1px solid #b8b8b8;
+    border-bottom: 1px solid #b8b8b8;
+}   
+
+
 
 .name{
     font-size: 18px;
-    
+    margin-left: 500px;
 }
+
+.tag{
+    margin-top: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    padding-top: 3px;
+    padding-bottom: 4px;
+    padding-left: 3px;
+    padding-right: 3px;
+    background-color: #c8d9ff;
+    color: #19419e;
+}
+
+.tag:hover{
+    background-color: #b8cdff;
+}
+
 .title{
     text-decoration: none;
     font-size: 25px;
-    text-align: center;
     color: #346ff9;
+    margin-right: 50px;
 }   
 
 .title:hover{
     color: #19419e;
 }
+
+.profile{
+    margin-top: 100px;
+}
+
+.profile_inner{
+    
+}
+
+.profile_item{
+    width: 50%;
+    border-top: 1px solid #636363;
+    border-bottom: 1px solid #636363;
+    border-left: 1px solid #636363;
+    border-right: 1px solid #636363;
+}
+
+
+.user_name{
+    margin-left: 1040px;
+    color: #3f3f3f;
+    text-decoration: none;
+    padding: 8px;
+    border-top: 1px solid #636363;
+    border-bottom: 1px solid #636363;
+    border-left: 1px solid #636363;
+    border-right: 1px solid #636363;
+    border-radius: 4px;
+}
+
+.user_name:hover{
+    background-color: #f2f1f1;
+}
+
+.profilename{
+    text-decoration: none;
+    font-size: 50px;
+    color: #333;
+}
+
+.images{
+    height: 200px;
+    border-radius: 10px;
+}
+
+.profile_q{
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+    padding-top: 0;
+}
+
+
+
+

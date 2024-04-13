@@ -1,41 +1,42 @@
-
-
 {% extends 'base.html' %}
 
 {% block main %}
-<form action="." method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% if user.image %}
-    <div>
-        <img src="{{ user.image.url }}" alt="" style="height: 70px; width: 70px; border-radius: 50%;">
-        <input type="file" id="id_image" name="image" accept="image/*">
-        {% if form.image.errors %}
-        {{ form.image.errors }}
-        {% endif %}
+
+<div class="profile">
+    <div class="container">
+
+        <a class="link_profile" href="{% url 'profile' user.username %}">
+            <img class="images" src="{{ user.image.url }}" alt="">
+        </a>
+        <a class="profilename" href="{% url 'profile' request.user.username %}">{{ request.user.username }}</a>
+
+        <a class="user_name" href="{% url 'edit_profile' user.username %}">Edit profile</a>
+
+
+        <div class="profile_inner">
+            <h1>Answer</h1>
+
+            <div class="profile_item">
+
+                <div class="profile_q">
+                    {% for a in answers %}
+                    <a class="profile_link" href="{% url 'quest_detail' a.question.slug %}">{{a.question.title}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <h1>Questions</h1>
+
+            <div class="profile_q">
+                <div class="profile_item">
+
+                {% for q in questions %}
+                <a class="profile_link" href="{% url 'quest_detail' q.slug %}">
+                    <p>{{ q.title }}</p>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    {% endif %}
-    <div>
-        <label for="id_first_name">Имя:</label>
-        <input type="text" id="id_first_name" name="first_name" value="{{ form.first_name.value }}" required>
-    </div>
-    <div>
-        <label for="id_last_name">Фамилия:</label>
-        <input type="text" id="id_last_name" name="last_name" value="{{ form.last_name.value }}" required>
-    </div>
-    <div>
-        <label for="id_username">Имя пользователь:</label>
-        <input type="text" id="id_username" name="username" value="{{ form.username.value }}" required>
-    </div>
-    <div>
-        <label for="id_email">Почта:</label>
-        <input type="text" id="id_email" name="email" value="{{ form.email.value }}" required>
-    </div>
-    <div>
-        <label for="id_link">Ссылка на вашу социальную сеть:</label>
-        <input type="text" id="id_link" name="link" value="{{ form.link.value }}" required>
-    </div>
-    <button type="submit">Сохранить</button>
-</form>
+</div>
 {% endblock %}
-
-

@@ -17,3 +17,5 @@ class ChangeProfileForm(UserChangeForm):
             'email',
             'link',
         )
+
+

@@ -37,6 +37,7 @@ def profile(request, username):
     context = {
         'questions': questions,
         'answers':answers,
+        'user':user
     }
 
     return render(request, 'users/profile.html', context)

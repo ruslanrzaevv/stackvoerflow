@@ -3,5 +3,5 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    image = models.ImageField(upload_to='users_images', blank=True)
+    image = models.ImageField(upload_to='users_images', blank=True,)
     link = models.URLField(blank=True)  

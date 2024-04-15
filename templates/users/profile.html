@@ -6,7 +6,9 @@
     <div class="container">
 
         <a class="link_profile" href="{% url 'profile' user.username %}">
+            {% if user.image %}
             <img class="images" src="{{ user.image.url }}" alt="">
+            {% endif %}
         </a>
         <a class="profilename" href="{% url 'profile' request.user.username %}">{{ request.user.username }}</a>
 

@@ -10,7 +10,13 @@
             <img class="images" src="{{ user.image.url }}" alt="">
             {% endif %}
         </a>
+
+
+
         <a class="profilename" href="{% url 'profile' request.user.username %}">{{ request.user.username }}</a>
+
+
+
 
         <a class="user_name" href="{% url 'edit_profile' user.username %}">Edit profile</a>
 

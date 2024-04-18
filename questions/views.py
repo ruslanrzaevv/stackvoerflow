@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 
 from questions.models import Question, Answer
 from django.db.models import Q
 from questions.forms import AddQuestionForm, AddAnswerForm
 from django.core.paginator import Paginator
 
+# @login_required
 def index(request):
     questions = Question.objects.all()
 
@@ -49,6 +51,7 @@ def questions_from_tag(request, tag_id):
     return render(request, 'questions/index.html', context)
 
 
+@login_required
 def add_question(request):
     form = AddQuestionForm()
 

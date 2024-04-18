@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-# from django.contrib.auth.views import LoginView, LogoutView
-# from django.urls import reverse_lazy
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse_lazy
+from django.contrib.auth.forms import User
 
-from users.forms import ChangeProfileForm
+from users.forms import ChangeProfileForm, LoginUserForm
 from questions.models import Question, Answer
 from users.models import User
 
@@ -42,3 +43,10 @@ def profile(request, username):
 
     return render(request, 'users/profile.html', context)
 
+class loginUser(LoginView):
+
+    form_class = LoginUserForm
+    template_name = 'users/login.html'
+    extra_context = {'title': 'Authenticted'}
+
+    

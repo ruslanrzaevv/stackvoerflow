@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.views import LoginView, LogoutView
-from django.urls import reverse_lazy
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout
 from django.contrib.auth.forms import User
+from django.core.mail import send_mail
 
-from users.forms import ChangeProfileForm, LoginUserForm
+
+from users.forms import ChangeProfileForm, LoginUserForm, RegisterUserForm
 from questions.models import Question, Answer
 from users.models import User
+
 
 
 def edit_profile(request, username):
@@ -49,4 +52,50 @@ class loginUser(LoginView):
     template_name = 'users/login.html'
     extra_context = {'title': 'Authenticted'}
 
-    
+
+def logout_view(request):
+    form = RegisterUserForm()
+
+    if request.method == 'POST':
+
+        logout(request)
+
+    return render(request, 'users/logout.html', {})
+
+
+
+def register(request):
+    form = RegisterUserForm() 
+
+    if request.method == 'POST':
+        form = RegisterUserForm(request.POST)
+
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            
+            send_mail(
+                'Потверждение регистрации',
+                'Код для потверждения: 1234567',
+                'azbergen74@gmail.com',
+                [user.email],
+                fail_silently=False,
+            )
+
+
+            return redirect('confirmation_sent')
+    else:
+        form = RegisterUserForm()
+
+    return render(request, 'users/register.html', {'form': form})
+
+
+def confirmation_sent(request):
+    if request.method == 'POST':
+        confirmation_code = request.POST.get('confirmation_code')
+        if confirmation_code == '123456':  
+            return redirect('login')  
+        else:
+            return render(request, 'users/confirmation_sent.html', {'error': 'Неверный код подтверждения'})
+    return render(request, 'users/confirmation_sent.html')

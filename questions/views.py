@@ -6,7 +6,7 @@ from django.db.models import Q
 from questions.forms import AddQuestionForm, AddAnswerForm
 from django.core.paginator import Paginator
 
-# @login_required
+@login_required
 def index(request):
     questions = Question.objects.all()
 

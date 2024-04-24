@@ -23,12 +23,37 @@ class ChangeProfileForm(UserChangeForm):
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'form-input'}))
-    password = forms.CharField(label='Password', widget=forms.TextInput(attrs={'class': 'form-input'}))
+    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
 
     class Meta:
         model = get_user_model()
         fields = [
             'username', 'password'
         ]
+
+class RegisterUserForm(forms.ModelForm):
+    username = forms.CharField(label='Login')
+    password = forms.CharField(label='Password', widget=forms.PasswordInput())    
+    password2 = forms.CharField(label='Password2', widget=forms.PasswordInput())    
+
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'email', 'first_name', 'last_name', 'password', 'password2']
+
+    def clean_password2(self):
+        cd = self.cleaned_data
+
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError('Passwords failed')
+        return cd['password']
+    
+    def clean_email(self):
+        email = self.cleaned_data['email']
+
+        if get_user_model().objects.filter(email=email).exists():
+            raise forms.ValidationError('Такой E-mail уже существует')
+        return email
+    
+
 
 

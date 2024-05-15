@@ -7,10 +7,14 @@
 
             <form action="." method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% if user.image %}
                 <div>
                     <a class="link_profile" href="{% url 'profile' user %}">
+                        {% if user.image %}
+
                         <img class="image" src="{{ user.image.url }}" alt="">
+                        {% else %}
+                        <img class="images" src="/media/users_images/profile.webp" alt="">
+
                     </a>
                     
                     <input type="file" id="id_image" name="image" accept="image/*">
@@ -26,7 +30,7 @@
                 <div>
                     <label for="id_last_name">Фамилия:</label>
                     <input type="text" id="id_last_name" name="last_name" value="{{ form.last_name.value }}" required>
-                </div>
+                </div>  
                 <div>
                     <label for="id_username">Имя пользователь:</label>
                     <input type="text" id="id_username" name="username" value="{{ form.username.value }}" required>

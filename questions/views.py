@@ -5,6 +5,9 @@ from questions.models import Question, Answer
 from django.db.models import Q
 from questions.forms import AddQuestionForm, AddAnswerForm
 from django.core.paginator import Paginator
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 @login_required
 def index(request):
@@ -86,3 +89,18 @@ def add_answer(request,  question_id):
             answer.save()   
 
     return redirect('quest_detail', question.slug)
+
+
+def tags(request):
+    tags = Question.tag.all()
+
+    return render(request, 'questions/tags.html', {'tag':tags})
+
+
+def users_l(request):
+
+    
+    user = User.objects.all()
+    return render(request, 'questions/user.html' , {'user':user})
+
+

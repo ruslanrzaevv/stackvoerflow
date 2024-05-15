@@ -6,46 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stack Overflow</title>
     {{ form.media }}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 
-    <style>
-        
-    </style>
-    
-
-    <header class="header" id="header">
-        <div class="container">
-            <div class="header__inner">
-                
-                <a class="header__logo" href="{% url 'index' %}">Stack overflow</a>
-                {% include "questions/search.html" %}
-
+<header class="header" id="header">
+    <div class="container">
+        <div class="header_inner">
+            <div class="navv" id="navv">
+                <img id="icon" class="icon" src="https://www.svgrepo.com/show/506800/burger-menu.svg" alt="Menu"> 
+                {% if request.user.is_authenticated %}
+                <div class="navv_inner" id="navv_inner">
+                    <a class="navv__link" href="{% url 'index' %}">Home</a>
+                    <a class="navv__link" href="{% url 'index' %}">Questions</a>
+                    <a class="navv__link" href="#">Tags</a>
+                    <a class="navv__link" href="#">Saves</a>
+                    <a class="navv__link" href="#">Users</a>  
+                </div>     
+                {% endif %}
+            </div>
+            <a class="header__logo" href="{% url 'index' %}">Stack Overflow</a>
+            {% include "questions/search.html" %}
             <nav class="nav">
                 {% if request.user.is_authenticated %}
-                <a class="nav__link" href="{% url 'profile' user.username %}">{{ user.username }}</a> |
-
+                <a class="nav__link" href="{% url 'profile' user.username %}">
+                    <img class="profileimg" src="/media/users_images/profile.webp" alt="">
+                </a> |
                 <a class="nav__link" href="{% url 'logout' %}">Logout</a>
-
                 {% else %}
                 <a class="nav__link" href="{% url 'login' %}">Log in</a>
-                <a class="nav__link" href="#">Sign in</a>
+                <a class="nav__link" href="{% url 'register' %}">Sign in</a>
                 {% endif %}
             </nav>
         </div>
-        </div>
-    </header>
+    </div>
+</header>
 
-    <main class="main">
-        {% block main %}
-        {% endblock %}
-    </main>
+<main class="main">
+    {% block main %}
+    {% endblock %}
+</main>
 
-    <footer>
-    </footer>
-    <script src="{% static 'js/app.js' %}"></script>
+<footer></footer>
+<script src="{% static 'js/app.js' %}"></script>
 </body>
 </html>

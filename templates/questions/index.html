@@ -2,6 +2,8 @@
 
 {% block main %}
 
+{% if request.user.is_authenticated %}
+
 <div class="intro" id="intro">
     <div class="container">
         <div class="intro__inner">
@@ -29,7 +31,10 @@
                         {% for tag in q.tag.all %}
                         <a class="tag" href="{% url 'tag_detail' tag.pk %}">{{ tag }}{% if not forloop.last %}, {% endif %}</a>
                         {% endfor %}
-                        <p class="name">{{ q.user }}</p>
+                        <a href="{% url 'profile' q.user.username %}" class="name">
+                            {{ q.user.username }}
+                            <img class="profileimg" src="/media/users_images/profile.webp" alt="">
+                        </a>
                         <p class="created">{{ q.created_at }}</p>
                 </div>
             </div>
@@ -38,6 +43,13 @@
                         
 {% endfor %}
 
+{% else %}
+
+{% include "users/register.html" %}
+
+
+{% endif %}
 {% endblock %}
+
 
 

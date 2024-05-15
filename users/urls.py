@@ -10,6 +10,5 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('profile/<slug:username>/', profile, name='profile'), 
     path('profile/edit/<slug:username>/', edit_profile, name='edit_profile'),
-    path('confirmation_sent/', views.confirmation_sent, name='confirmation_sent'),
 
 ]

@@ -8,12 +8,16 @@
         <a class="link_profile" href="{% url 'profile' user.username %}">
             {% if user.image %}
             <img class="images" src="{{ user.image.url }}" alt="">
+            {% else %}
+            <img class="images" src="/media/users_images/profile.webp" alt="">
             {% endif %}
         </a>
 
 
 
-        <a class="profilename" href="{% url 'profile' request.user.username %}">{{ request.user.username }}</a>
+        <a class="nav__link" href="{% url 'profile' request.user.username %}">
+            {{ request.user.username }}
+        </a>
 
 
 

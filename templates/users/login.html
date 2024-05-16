@@ -3,12 +3,7 @@
 {% block main %}
 <form style="margin-top: 100px;" action="{% url 'login' %}" method="post">
     {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}" />
-    <div class="form-error">{{ form.non_field_errors }}</div>
-    {% for f in form %}
-    <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
-    <div class="form-error">{{ f.errors }}</div>
-    {% endfor %}
+    {{ form.as_p }}
     <button type="submit">Войти</button>
 </form>
 {% endblock %}

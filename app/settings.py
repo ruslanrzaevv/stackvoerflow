@@ -7,12 +7,6 @@ SECRET_KEY = 'django-insecure-3(yb_^_+t(tw_)-6cnf!&9c&)me8c5rbfuakk1&)6n6705r$4b
 
 DEBUG = True
 
-EMAIL_HOST = 'smpt.gmail.com'
-EMAIL_HOST_USER = 'rzruslan9@gmail.com'
-EMAIL_HOST_PASSWORD = 'heckfy@))(!)'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 ALLOWED_HOSTS = []
         
 
@@ -111,9 +105,9 @@ MEDIA_URL = 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
-LOGIN_URL = 'login'
+# LOGIN_REDIRECT_URL = 'index'
+# LOGOUT_REDIRECT_URL = 'index'
+# LOGIN_URL = 'login'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
